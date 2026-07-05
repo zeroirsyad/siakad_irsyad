@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background">
+
+    <!-- 1. LOCKED STATE LAYOUT -->
+    <LinearLayout
+        android:id="@+id/layoutLocked"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@android:drawable/ic_secure"
+            android:contentDescription="Locked"
+            android:tint="#BA1A1A"
+            android:layout_marginBottom="24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Akses KRS Terkunci"
+            android:textColor="#1B1B1D"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/tvLockMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Pembayaran UKT belum diselesaikan. Silakan lakukan pembayaran dan verifikasi keuangan terlebih dahulu."
+            android:textColor="#76777D"
+            android:textSize="14sp"
+            android:layout_marginBottom="32dp" />
+
+        <android.widget.Button
+            android:id="@+id/btnBackFromLock"
+            android:layout_width="200dp"
+            android:layout_height="48dp"
+            android:background="@drawable/button_gradient"
+            android:text="Kembali Ke Dashboard"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+    <!-- 2. UNLOCKED KRS REGISTRATION CONTENT -->
+    <ScrollView
+        android:id="@+id/layoutKrsContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Title and SKS Header Card -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_dark_bg"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kartu Rencana Studi (KRS)"
+                    android:textColor="#1B1B1D"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih kelas yang akan Anda ikuti pada semester ini"
+                    android:textColor="#76777D"
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Credit indicators -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Beban SKS Maksimal"
+                            android:textColor="#76777D"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvMaxSks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="24 SKS"
+                            android:textColor="#1B1B1D"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SKS Terpilih"
+                            android:textColor="#76777D"
+                            android:textSize="11sp" />
+
+                        <TextView
+                            android:id="@+id/tvSelectedSks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 SKS"
+                            android:textColor="#4B41E1"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <android.widget.Button
+                    android:id="@+id/btnSubmitKrs"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/button_gradient"
+                    android:text="Ajukan Rencana Studi (KRS)"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+            <!-- Collision Warnings Container -->
+            <LinearLayout
+                android:id="@+id/collisionWarningCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_dark_bg"
+                android:backgroundTint="#FFDAD6"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚠️ Peringatan Bentrok Jadwal!"
+                    android:textColor="#BA1A1A"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/tvCollisionDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#BA1A1A"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Section 1: Selected / Draft Classes -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Draft Kelas Terpilih"
+                android:textColor="#1B1B1D"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:id="@+id/draftKrsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:id="@+id/tvNoDraft"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="20dp"
+                    android:text="Belum ada kelas yang dipilih."
+                    android:textColor="#76777D"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Section 2: Catalog of Available Classes -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Katalog Mata Kuliah Tersedia"
+                android:textColor="#1B1B1D"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:id="@+id/catalogContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Dynamic list -->
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

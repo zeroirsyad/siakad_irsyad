@@ -1,0 +1,124 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique // NIM for Mahasiswa, NIDN for Dosen, username for Admin
+  password  String
+  role      String   // "Mahasiswa", "Dosen", "Admin"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  mahasiswa Mahasiswa?
+  dosen     Dosen?
+}
+
+model Mahasiswa {
+  id         String   @id @default(uuid())
+  nim        String   @unique
+  nama       String
+  status     String   @default("Aktif") // "Aktif", "Cuti"
+  uktStatus  String   @default("Belum Lunas") // "Lunas", "Belum Lunas"
+  ipk        Float    @default(0.0)
+  sksTotal   Int      @default(0)
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dosenPaId  String?
+  dosenPa    Dosen?   @relation(fields: [dosenPaId], references: [id])
+  krs        KRS[]
+  nilai      Nilai[]
+  presensi   Presensi[]
+}
+
+model Dosen {
+  id         String   @id @default(uuid())
+  nidn       String   @unique
+  nama       String
+  prodi      String
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bimbingan  Mahasiswa[]
+  jadwal     Jadwal[]
+}
+
+model MataKuliah {
+  id        String   @id @default(uuid())
+  kode      String   @unique
+  nama      String
+  sks       Int
+  semester  Int
+  kuota     Int      @default(40)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  jadwal    Jadwal[]
+  nilai     Nilai[]
+}
+
+model Jadwal {
+  id           String     @id @default(uuid())
+  mataKuliahId String
+  mataKuliah   MataKuliah @relation(fields: [mataKuliahId], references: [id], onDelete: Cascade)
+  dosenId      String
+  dosen        Dosen      @relation(fields: [dosenId], references: [id], onDelete: Cascade)
+  hari         String     // "Senin", "Selasa", etc.
+  jamMulai     String     // e.g., "08:00"
+  jamSelesai   String     // e.g., "10:30"
+  ruangan      String     // e.g., "Lab B.204"
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  krs          KRS[]
+  presensi     Presensi[]
+}
+
+model KRS {
+  id          String    @id @default(uuid())
+  mahasiswaId String
+  mahasiswa   Mahasiswa @relation(fields: [mahasiswaId], references: [id], onDelete: Cascade)
+  jadwalId    String
+  jadwal      Jadwal    @relation(fields: [jadwalId], references: [id], onDelete: Cascade)
+  status      String    @default("Draft") // "Draft", "Menunggu Persetujuan", "Divalidasi", "Ditolak / Revisi"
+  catatan     String?   // Feedback from Dosen PA
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([mahasiswaId, jadwalId])
+}
+
+model Nilai {
+  id           String     @id @default(uuid())
+  mahasiswaId  String
+  mahasiswa    Mahasiswa  @relation(fields: [mahasiswaId], references: [id], onDelete: Cascade)
+  mataKuliahId String
+  mataKuliah   MataKuliah @relation(fields: [mataKuliahId], references: [id], onDelete: Cascade)
+  tugas        Float      @default(0.0)
+  uts          Float      @default(0.0)
+  uas          Float      @default(0.0)
+  akhir        Float      @default(0.0)
+  huruf        String     @default("E")
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@unique([mahasiswaId, mataKuliahId])
+}
+
+model Presensi {
+  id          String    @id @default(uuid())
+  mahasiswaId String
+  mahasiswa   Mahasiswa @relation(fields: [mahasiswaId], references: [id], onDelete: Cascade)
+  jadwalId    String
+  jadwal      Jadwal    @relation(fields: [jadwalId], references: [id], onDelete: Cascade)
+  tanggal     String    // YYYY-MM-DD
+  status      String    // "Hadir", "Sakit", "Izin", "Alpa"
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@unique([mahasiswaId, jadwalId, tanggal])
+}

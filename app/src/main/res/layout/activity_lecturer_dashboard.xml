@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCF8FA">
+
+    <!-- FrameContainer for Tabs -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation">
+
+        <!-- TAB 1: HOME -->
+        <ScrollView
+            android:id="@+id/layout_lecturer_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Top Navigation / Greeting Bar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="28dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DOSEN PORTAL"
+                            android:textColor="#4B41E1"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.1" />
+
+                        <TextView
+                            android:id="@+id/tvLecturerName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dr. Ahmad Fauzi"
+                            android:textColor="#1B1B1D"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="2dp" />
+
+                        <TextView
+                            android:id="@+id/tvLecturerNidn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NIDN: 19882034"
+                            android:textColor="#76777D"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                
+                <!-- Welcome Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="24dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            app:tint="#4B41E1"
+                            android:layout_marginBottom="16dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selamat Datang"
+                            android:textColor="#1B1B1D"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gunakan navigasi di bawah untuk mengelola persetujuan KRS dan jadwal mengajar Anda."
+                            android:textColor="#76777D"
+                            android:textSize="13sp"
+                            android:textAlignment="center"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Shortcut Menu -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aksi Cepat"
+                    android:textColor="#1B1B1D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <android.widget.Button
+                    android:id="@+id/btnGotoInputNilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/button_gradient"
+                    android:text="Input Nilai Mahasiswa"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:elevation="0dp"
+                    android:layout_marginBottom="24dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 2: BIMBINGAN -->
+        <ScrollView
+            android:id="@+id/layout_lecturer_bimbingan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Section 1: Supervision List -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Persetujuan Rencana Studi (KRS)"
+                        android:textColor="#1B1B1D"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/supervisionContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="28dp">
+
+                    <TextView
+                        android:id="@+id/tvNoSupervision"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="32dp"
+                        android:text="Tidak ada pengajuan rencana studi aktif."
+                        android:textColor="#76777D"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 3: KELAS -->
+        <ScrollView
+            android:id="@+id/layout_lecturer_kelas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Section: Create Class Form -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buat Kelas / Mata Kuliah Baru"
+                    android:textColor="#1B1B1D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Kode MK (Contoh: MK001)"
+                            app:boxStrokeColor="#4B41E1"
+                            android:layout_marginBottom="12dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etKodeMk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Nama Mata Kuliah"
+                            app:boxStrokeColor="#4B41E1"
+                            android:layout_marginBottom="12dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etNamaMk"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="12dp">
+                            
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="SKS"
+                                app:boxStrokeColor="#4B41E1"
+                                android:layout_marginEnd="6dp">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etSksMk"
+                                    android:inputType="number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="Semester"
+                                app:boxStrokeColor="#4B41E1"
+                                android:layout_marginStart="6dp">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etSemesterMk"
+                                    android:inputType="number"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <android.widget.Button
+                            android:id="@+id/btnCreateKelasManual"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:background="@drawable/button_gradient"
+                            android:text="Simpan &amp; Buka Kelas"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Section: Taught Classes List -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar Kelas Anda"
+                    android:textColor="#1B1B1D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <LinearLayout
+                    android:id="@+id/lecturerClassesContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNoLecturerClasses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="32dp"
+                        android:text="Tidak ada kelas mengajar yang terdaftar."
+                        android:textColor="#76777D"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 4: PROFILE -->
+        <ScrollView
+            android:id="@+id/layout_lecturer_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pengaturan Profil"
+                    android:textColor="#1B1B1D"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Avatar & Identity Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="32dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        app:cardCornerRadius="48dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#EAE7E9"
+                        app:cardBackgroundColor="#FCF8FA"
+                        android:layout_marginBottom="16dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="#4B41E1"
+                            android:padding="24dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dr. Ahmad Fauzi"
+                        android:textColor="#1B1B1D"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dosen Pengajar Aktif"
+                        android:textColor="#76777D"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- Settings List Card -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pengaturan Aplikasi"
+                    android:textColor="#1B1B1D"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="32dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Item 1: Ubah Profil -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@android:drawable/ic_menu_edit"
+                                app:tint="#4B41E1"
+                                android:layout_marginEnd="16dp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Perbarui Data Dosen"
+                                android:textColor="#1B1B1D"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                app:tint="#C4C5CA" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EAE7E9" android:layout_marginHorizontal="16dp"/>
+
+                        <!-- Item 2: Keamanan -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@android:drawable/ic_lock_lock"
+                                app:tint="#4B41E1"
+                                android:layout_marginEnd="16dp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Keamanan &amp; Kata Sandi"
+                                android:textColor="#1B1B1D"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                app:tint="#C4C5CA" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EAE7E9" android:layout_marginHorizontal="16dp"/>
+
+                        <!-- Item 3: Notifikasi -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@android:drawable/ic_menu_info_details"
+                                app:tint="#4B41E1"
+                                android:layout_marginEnd="16dp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Pusat Bantuan Dosen"
+                                android:textColor="#1B1B1D"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                app:tint="#C4C5CA" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Logout Button -->
+                <android.widget.Button
+                    android:id="@+id/btnLecturerLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/button_gradient"
+                    android:backgroundTint="#BA1A1A"
+                    android:text="Keluar dari Portal Dosen"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:elevation="0dp"
+                    android:layout_marginBottom="24dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:elevation="16dp"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemIconTint="@color/selector_nav_icon"
+        app:itemTextColor="@color/selector_nav_text"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_lecturer" />
+
+</RelativeLayout>

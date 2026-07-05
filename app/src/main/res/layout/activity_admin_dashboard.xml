@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FCF8FA">
+
+    <!-- FrameContainer for Tabs -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation">
+
+        <!-- TAB 1: HOME -->
+        <ScrollView
+            android:id="@+id/layout_admin_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Top Navigation / Greeting Bar -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="28dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ADMINISTRATOR PORTAL"
+                            android:textColor="#4B41E1"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Akademik &amp; Keuangan"
+                            android:textColor="#1B1B1D"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:layout_marginTop="2dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kelola data mahasiswa &amp; jadwal kuliah"
+                            android:textColor="#76777D"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Welcome Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="24dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            app:tint="#4B41E1"
+                            android:layout_marginBottom="16dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Selamat Datang Admin"
+                            android:textColor="#1B1B1D"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gunakan navigasi di bawah untuk memverifikasi pembayaran UKT dan membuat jadwal perkuliahan."
+                            android:textColor="#76777D"
+                            android:textSize="13sp"
+                            android:textAlignment="center"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 2: KEUANGAN -->
+        <ScrollView
+            android:id="@+id/layout_admin_keuangan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Section 1: UKT Finance Verification -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Verifikasi Keuangan (UKT)"
+                    android:textColor="#1B1B1D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="28dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- Summary indicators -->
+                        <TextView
+                            android:id="@+id/tvFinanceSummary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Mahasiswa: - | Lunas: - | Belum Lunas: -"
+                            android:textColor="#76777D"
+                            android:textSize="13sp"
+                            android:layout_marginBottom="16dp" />
+
+                        <!-- Student Verification List Container -->
+                        <LinearLayout
+                            android:id="@+id/studentVerifyListContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvNoStudentVerify"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="24dp"
+                                android:text="Memuat daftar mahasiswa..."
+                                android:textColor="#76777D"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 3: JADWAL -->
+        <ScrollView
+            android:id="@+id/layout_admin_jadwal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Section 2: Scheduler Form -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pembuat Jadwal Kuliah Baru"
+                    android:textColor="#1B1B1D"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- MataKuliah Spinner / Custom Select -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mata Kuliah (Pilih Kode)"
+                            android:textColor="#76777D"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="6dp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerMataKuliah"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="@drawable/card_dark_bg"
+                            android:popupBackground="#FFFFFF"
+                            android:layout_marginBottom="20dp" />
+
+                        <!-- Dosen Spinner / Custom Select -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dosen Pengampu"
+                            android:textColor="#76777D"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="6dp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerDosen"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="@drawable/card_dark_bg"
+                            android:popupBackground="#FFFFFF"
+                            android:layout_marginBottom="20dp" />
+
+                        <!-- Hari input -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Hari (contoh: Senin)"
+                            android:textColorHint="#76777D"
+                            app:hintTextColor="#4B41E1"
+                            app:boxStrokeColor="#4B41E1"
+                            android:layout_marginBottom="16dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etHari"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#1B1B1D" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Jam Mulai / Jam Selesai -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginBottom="16dp">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="Mulai (contoh: 08:30)"
+                                android:textColorHint="#76777D"
+                                app:hintTextColor="#4B41E1"
+                                app:boxStrokeColor="#4B41E1"
+                                android:layout_marginEnd="6dp">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etJamMulai"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#1B1B1D" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="Selesai (contoh: 11:00)"
+                                android:textColorHint="#76777D"
+                                app:hintTextColor="#4B41E1"
+                                app:boxStrokeColor="#4B41E1"
+                                android:layout_marginStart="6dp">
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etJamSelesai"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#1B1B1D" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <!-- Ruangan -->
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Ruangan (contoh: Lab B.204)"
+                            android:textColorHint="#76777D"
+                            app:hintTextColor="#4B41E1"
+                            app:boxStrokeColor="#4B41E1"
+                            android:layout_marginBottom="24dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etRuangan"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textColor="#1B1B1D" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <!-- Submit Button -->
+                        <android.widget.Button
+                            android:id="@+id/btnCreateJadwal"
+                            android:layout_width="match_parent"
+                            android:layout_height="54dp"
+                            android:background="@drawable/button_gradient"
+                            android:text="Buat Jadwal Kuliah"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:textAllCaps="false" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- TAB 4: PROFILE -->
+        <ScrollView
+            android:id="@+id/layout_admin_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+                
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Pengaturan Sistem"
+                    android:textColor="#1B1B1D"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Avatar & Identity Header -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="32dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        app:cardCornerRadius="48dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#EAE7E9"
+                        app:cardBackgroundColor="#FCF8FA"
+                        android:layout_marginBottom="16dp">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@android:drawable/ic_menu_camera"
+                            app:tint="#4B41E1"
+                            android:padding="24dp" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Administrator Utama"
+                        android:textColor="#1B1B1D"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Super Admin"
+                        android:textColor="#76777D"
+                        android:textSize="14sp"
+                        android:layout_marginTop="4dp" />
+                </LinearLayout>
+
+                <!-- Settings List Card -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manajemen"
+                    android:textColor="#1B1B1D"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#EAE7E9"
+                    app:cardBackgroundColor="#FFFFFF"
+                    android:layout_marginBottom="32dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Item 1: Kelola Akses -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@android:drawable/ic_menu_edit"
+                                app:tint="#4B41E1"
+                                android:layout_marginEnd="16dp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Kelola Hak Akses Pengguna"
+                                android:textColor="#1B1B1D"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                app:tint="#C4C5CA" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EAE7E9" android:layout_marginHorizontal="16dp"/>
+
+                        <!-- Item 2: Keamanan -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@android:drawable/ic_lock_lock"
+                                app:tint="#4B41E1"
+                                android:layout_marginEnd="16dp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Log Keamanan Sistem"
+                                android:textColor="#1B1B1D"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                app:tint="#C4C5CA" />
+                        </LinearLayout>
+
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EAE7E9" android:layout_marginHorizontal="16dp"/>
+
+                        <!-- Item 3: Notifikasi -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@android:drawable/ic_menu_info_details"
+                                app:tint="#4B41E1"
+                                android:layout_marginEnd="16dp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Pengaturan Notifikasi Global"
+                                android:textColor="#1B1B1D"
+                                android:textSize="15sp" />
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_media_next"
+                                app:tint="#C4C5CA" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Logout Button -->
+                <android.widget.Button
+                    android:id="@+id/btnAdminLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/button_gradient"
+                    android:backgroundTint="#BA1A1A"
+                    android:text="Keluar dari Portal Admin"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:elevation="0dp"
+                    android:layout_marginBottom="24dp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <!-- Bottom Navigation Bar -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:elevation="16dp"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemActiveIndicatorStyle="@null"
+        app:itemIconTint="@color/selector_nav_icon"
+        app:itemTextColor="@color/selector_nav_text"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_admin" />
+
+</RelativeLayout>
